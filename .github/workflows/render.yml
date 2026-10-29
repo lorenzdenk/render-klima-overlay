@@ -73,7 +73,7 @@ jobs:
                  --label-decimals "${LABEL_DECIMALS:-1}" --label-min-cover "${LABEL_MIN_COVER:-0.05}")
             if [ -n "${LABEL_MINZOOM:-}" ]; then lab+=(--label-minzoom "$LABEL_MINZOOM"); fi
           fi
-          python scripts/render_mbtiles.py "${lab[@]}" work/combined.tif -o "out/$NAME.mbtiles" --tile-size 512 --extra-zoom 0 \
+          python scripts/render_mbtiles.py "${lab[@]}" work/combined.tif -o "out/$NAME.mbtiles" --tile-size 512 --extra-zoom "${EXTRA_ZOOM:-0}" \
             --minzoom "$MINZOOM" --maxzoom "$MAXZOOM" --cmap "$CMAP" --vmin "$VMIN" --vmax "$VMAX" --gamma "${GAMMA:-1}" \
             --unit "$UNIT" --name "$TITLE" --description "$DESCRIPTION" --attribution "$ATTRIBUTION" \
             --webp-quality "${QUALITY:-90}" --workers 4 2>&1 | tee logs/render.log

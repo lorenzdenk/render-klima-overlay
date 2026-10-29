@@ -1,0 +1,66 @@
+name: Prepare ANUClimate
+# ANUClimate (ANU, auf NCI THREDDS, 0,01° ≈ 1 km): Monatswerte einer Variable für Tasmanien EINMAL per OPeNDAP holen,
+# je Monat über die Jahre mitteln und als Release-Dateien "anu-daten/<name>_<MM>.tif" ablegen.
+# Immer: Katalogübersicht in den Logs (Branch "anu-logs"), damit Pfade/Namen nachvollziehbar sind.
+on:
+  workflow_dispatch:
+    inputs:
+      catalog:
+        description: "THREDDS-Katalog der Variable (Dateien pro Jahr oder Monat)"
+        default: "https://thredds.nci.org.au/thredds/catalog/gh70/ANUClimate/v2-0/stable/month/tmin/catalog.xml"
+      var:
+        description: "Variablenname in den Dateien"
+        default: tmin
+      years:
+        description: "Jahre"
+        default: "1991-2020"
+      months:
+        description: "Monate"
+        default: "11 12"
+      name:
+        description: "Dateiname im Release (ohne _MM.tif)"
+        default: anu_tmin_1991-2020
+      list_root:
+        description: "Diesen Katalog zusätzlich auflisten (zur Orientierung)"
+        default: "https://thredds.nci.org.au/thredds/catalog/gh70/ANUClimate/catalog.xml"
+permissions:
+  contents: write
+env:
+  RELEASE: anu-daten
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: pip install -q numpy xarray netCDF4 rasterio pandas
+      - name: Catalog
+        run: |
+          mkdir -p logs
+          python scripts/thredds_fetch.py list "${{ github.event.inputs.list_root }}" --depth 4 2>&1 | head -300 | tee logs/catalog_root.log || true
+          python scripts/thredds_fetch.py list "${{ github.event.inputs.catalog }}" --depth 0 2>&1 | tee logs/catalog_var.log || true
+      - name: Fetch
+        run: |
+          set -o pipefail
+          mkdir -p data
+          python scripts/thredds_fetch.py fetch --catalog "${{ github.event.inputs.catalog }}" --var "${{ github.event.inputs.var }}" \
+            --years "${{ github.event.inputs.years }}" --months ${{ github.event.inputs.months }} \
+            --out "data/${{ github.event.inputs.name }}" 2>&1 | tee logs/fetch.log
+          ls -l data | tee -a logs/fetch.log
+      - name: Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release view "$RELEASE" -R "$GITHUB_REPOSITORY" >/dev/null 2>&1 || gh release create "$RELEASE" -R "$GITHUB_REPOSITORY" \
+            --latest=false -t "Tasmanien: ANUClimate (Quelldaten)" \
+            -n "Monatsmittel aus ANUClimate (ANU / NCI, 0,01°), Ausschnitt Tasmanien, je Monat über die Jahre gemittelt. Details in den .json-Dateien."
+          gh release upload "$RELEASE" data/*.tif data/*.json -R "$GITHUB_REPOSITORY" --clobber
+      - name: Publish log
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash scripts/push_logs.sh logs "anu-prepare ${{ github.run_id }} ${{ job.status }}" anu-logs

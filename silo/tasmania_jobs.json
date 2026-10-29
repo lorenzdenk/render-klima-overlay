@@ -1,0 +1,36 @@
+{
+  "window": { "start": "11-20", "end": "12-07" },
+  "years": "1991-2020",
+  "attribution": "Daten: SILO, Queensland Government (Longpaddock), interpolierte Raster 0,05 Grad",
+  "jobs": [
+    {
+      "id": "tmin_le10",
+      "name": "Tasmanien: Tage mit Tmin <= 10 °C (20.11.-07.12., Mittel pro Jahr)",
+      "folder": "min_temp", "stem": "min_temp", "var": "min_temp",
+      "op": "le", "threshold": 10, "expect_range": [-30, 45],
+      "cmap": "YlGnBu", "vmin": 0, "vmax": 18, "unit": "Tage/Jahr"
+    },
+    {
+      "id": "rain_ge1mm",
+      "name": "Tasmanien: Regentage >= 1 mm (20.11.-07.12., Mittel pro Jahr)",
+      "folder": "daily_rain", "stem": "daily_rain", "var": "daily_rain",
+      "op": "ge", "threshold": 1, "expect_range": [0, 1500],
+      "cmap": "Blues", "vmin": 0, "vmax": 18, "unit": "Tage/Jahr"
+    },
+    {
+      "id": "clear_le3oktas",
+      "name": "Tasmanien: Tage mit Bewölkung <= 3 Achtel (20.11.-07.12., Mittel pro Jahr)",
+      "folder": "cloud_oktas_radiation", "stem": "radiation", "var": "cloud_oktas_radiation",
+      "op": "le", "threshold": 3, "expect_range": [0, 8],
+      "cmap": "YlOrRd", "vmin": 0, "vmax": 18, "unit": "Tage/Jahr"
+    },
+    {
+      "id": "sunny_radiation_ge20",
+      "enabled": false,
+      "name": "Tasmanien: Tage mit Einstrahlung >= 20 MJ/m² (Alternative zur Bewölkung)",
+      "folder": "radiation", "stem": "radiation", "var": "radiation",
+      "op": "ge", "threshold": 20, "expect_range": [0, 50],
+      "cmap": "YlOrRd", "vmin": 0, "vmax": 18, "unit": "Tage/Jahr"
+    }
+  ]
+}

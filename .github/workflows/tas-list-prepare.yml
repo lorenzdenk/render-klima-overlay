@@ -1,0 +1,61 @@
+name: Prepare Tasmania LIST climate
+# Lädt Monatsraster der "Digital Climate Maps of Tasmania" (theLIST, 30 m) EINMAL per WCS und legt sie als
+# Release-Dateien "tas-list-daten/<layer>.tif" ab. Der Render-Workflow lädt nur noch von dort.
+# Bereits vorhandene Dateien werden übersprungen (ausser "force"). Capabilities und Coverage-Liste: Branch "prepare-logs".
+on:
+  workflow_dispatch:
+    inputs:
+      layers:
+        description: "Layernamen, durch Leerzeichen getrennt (leer = nur Capabilities lesen)"
+        default: "min_avg_nov min_avg_dec"
+      force:
+        description: "Vorhandene Release-Dateien neu laden"
+        type: boolean
+        default: false
+permissions:
+  contents: write
+env:
+  WCS_URL: https://spatial.dpipwe.tas.gov.au/naturalassets/Climate/ows
+  RELEASE: tas-list-daten
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq gdal-bin
+      - name: Capabilities
+        run: |
+          mkdir -p logs
+          python3 scripts/fetch_wcs.py capabilities "$WCS_URL" logs 2>&1 | tee logs/prepare.log
+          echo "--- Kandidaten (min/max/rain/prec):" | tee -a logs/prepare.log
+          grep -iE 'min|max|rain|prec|avg' logs/coverages.txt | sort -u | head -200 | tee -a logs/prepare.log || true
+      - name: Download
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -o pipefail
+          gh release view "$RELEASE" -R "$GITHUB_REPOSITORY" >/dev/null 2>&1 || gh release create "$RELEASE" -R "$GITHUB_REPOSITORY" \
+            --latest=false -t "Tasmanien: theLIST Klimaraster (Quelldaten)" \
+            -n "Monatsraster der Digital Climate Maps of Tasmania (theLIST, 30 m), unverändert per WCS geladen von $WCS_URL. Lizenz laut data.gov.au: nicht angegeben."
+          have=$(gh release view "$RELEASE" -R "$GITHUB_REPOSITORY" --json assets --jq '.assets[].name' || true)
+          mkdir -p data; fail=0
+          for l in ${{ github.event.inputs.layers }}; do
+            if [ "${{ github.event.inputs.force }}" != "true" ] && grep -qx "$l.tif" <<< "$have"; then
+              echo "$l.tif liegt schon im Release - übersprungen" | tee -a logs/prepare.log; continue
+            fi
+            if python3 scripts/fetch_wcs.py get "$WCS_URL" "$l" "data/$l.tif" logs 2>&1 | tee -a logs/prepare.log; then
+              gh release upload "$RELEASE" "data/$l.tif" -R "$GITHUB_REPOSITORY" --clobber
+              rm "data/$l.tif"
+            else
+              fail=1
+            fi
+          done
+          gh release view "$RELEASE" -R "$GITHUB_REPOSITORY" --json assets --jq '.assets[] | "\(.name)  \(.size)"' | tee -a logs/prepare.log
+          exit $fail
+      - name: Publish log
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash scripts/push_logs.sh logs "prepare ${{ github.run_id }} ${{ job.status }}" prepare-logs

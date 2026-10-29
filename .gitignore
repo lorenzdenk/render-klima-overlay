@@ -1,0 +1,13 @@
+*.mbtiles
+*.tif
+*.tif.raw
+*.aux.xml
+*.asc
+*.asc.gz
+*.nc
+data/
+out/
+logs/
+tasmania_out/
+_silo_tmp/
+__pycache__/

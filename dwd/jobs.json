@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Tage mit Schneedecke pro Jahr, Mittel 1991-2020",
+    "input": "grids_germany_multi_annual_snowcover_days_1991-2020_17.asc.gz",
+    "output": "out/de_snowcover_days_1991-2020.mbtiles",
+    "crs": "EPSG:31467",
+    "cmap": "Blues", "vmin": 0, "vmax": 150, "gamma": 0.6,
+    "unit": "Tage/Jahr",
+    "attribution": "© Deutscher Wetterdienst, CDC grids_germany"
+  },
+  {
+    "name": "Niederschlag, Jahressumme, Mittel 1991-2020",
+    "input": "grids_germany_multi_annual_precipitation_1991-2020_17.asc.gz",
+    "output": "out/de_precipitation_1991-2020.mbtiles",
+    "crs": "EPSG:31467",
+    "cmap": "YlGnBu", "vmin": 400, "vmax": 2000, "gamma": 0.8,
+    "unit": "mm/Jahr",
+    "attribution": "© Deutscher Wetterdienst, CDC grids_germany"
+  }
+]

@@ -1,0 +1,26 @@
+Eingabe  : work/combined.tif
+Raster   : 17321 x 18763 Zellen, 30 m, EPSG:32755
+Werte    : min 33.39  mittel 85.07  max 208.87  (gueltig: 74350720)
+Skala    : YlGnBu 20..250 gamma 0.7
+Bereich  : lon 143.606..148.582  lat -43.862..-39.160
+Zoom     : 5..11  (nativ 11 bei -41.5 Grad, +0 extra)
+Kandidaten-Kacheln: 1509
+Zoom  Kacheln   Daten
+   5        4       9.2 KB
+   6        4      19.6 KB
+   7        6      49.8 KB
+   8       17     128.1 KB
+   9       45     620.3 KB
+  10      132    1916.3 KB
+  11      438    6280.5 KB
+Summe     646    9023.8 KB   davon verschieden: 646   Datei: 9568.0 KB   (57.9 s)
+total 9588
+-rw-r--r-- 1 runner runner    9847 Oct 29 16:07 tasmanien-niederschlag-20nov-07dez-legende.png
+-rw-r--r-- 1 runner runner 9797632 Oct 29 16:07 tasmanien-niederschlag-20nov-07dez.mbtiles
+-rw-r--r-- 1 runner runner     771 Oct 29 16:07 tasmanien-niederschlag-20nov-07dez.meta.json
+Vorschau z7/116/80 (21 kB)
+Vorschau z7/115/80 (14 kB)
+Vorschau z9/463/323 (34 kB)
+Vorschau z9/463/321 (32 kB)
+Vorschau z11/1854/1293 (29 kB)
+Vorschau z11/1852/1285 (28 kB)

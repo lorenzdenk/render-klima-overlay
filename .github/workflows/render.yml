@@ -66,7 +66,8 @@ jobs:
         run: |
           set -o pipefail
           mkdir -p out
-          python scripts/render_mbtiles.py work/combined.tif -o "out/$NAME.mbtiles" --tile-size 512 --extra-zoom 0 \
+          lab=(); [ -n "${LABELS:-}" ] && lab=(--label-maxzoom --label-suffix "${LABEL_SUFFIX:-}")
+          python scripts/render_mbtiles.py "${lab[@]}" work/combined.tif -o "out/$NAME.mbtiles" --tile-size 512 --extra-zoom 0 \
             --minzoom "$MINZOOM" --maxzoom "$MAXZOOM" --cmap "$CMAP" --vmin "$VMIN" --vmax "$VMAX" --gamma "${GAMMA:-1}" \
             --unit "$UNIT" --name "$TITLE" --description "$DESCRIPTION" --attribution "$ATTRIBUTION" \
             --webp-quality "${QUALITY:-90}" --workers 4 2>&1 | tee logs/render.log

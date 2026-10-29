@@ -197,6 +197,31 @@ def sample(a, csL, x_left, y_top, sx, sy, mode):
     return out
 
 
+def _font(px):
+    key = ("font", px)
+    if key not in S:
+        from PIL import ImageFont
+        f = None
+        for path in ("DejaVuSans-Bold.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+                     "arialbd.ttf", "Arial Bold.ttf"):
+            try:
+                f = ImageFont.truetype(path, px)
+                break
+            except OSError:
+                continue
+        S[key] = f or ImageFont.load_default(size=px)
+    return S[key]
+
+
+def draw_label(im, value, ts, P):
+    """Mittelwert der Kachel (gueltige Pixel) als kleine Zahl in die Kachelmitte, dunkel mit hellem Rand."""
+    from PIL import ImageDraw
+    txt = f"{value:.{P['label_decimals']}f}".replace(".", P["label_sep"]) + P["label_suffix"]
+    d = ImageDraw.Draw(im)
+    d.text((ts / 2, ts / 2), txt, font=_font(P["label_px"]), anchor="mm", fill=(20, 20, 20, 255),
+           stroke_width=max(1, P["label_px"] // 7), stroke_fill=(255, 255, 255, 230))
+
+
 def render_tile(job):
     z, x, y = job
     P = S["p"]
@@ -224,6 +249,8 @@ def render_tile(job):
     rgba[..., 3] = np.where(fin, rgba[..., 3], 0)
     buf = io.BytesIO()
     im = Image.fromarray(rgba, "RGBA")
+    if P.get("label_zoom") is not None and z == P["label_zoom"] and fin.mean() >= P["label_min_cover"]:
+        draw_label(im, float(np.mean(v[fin])), ts, P)
     if P["webp_quality"] is None:
         im.save(buf, "WEBP", lossless=True, method=4)
     else:
@@ -299,7 +326,10 @@ def run(a):
         crs=crs, levels=build_pyramid(arr), lut=lut,
         p=dict(tile_size=a.tile_size, cs=cs, cs_m=cs_m, x_left=x_left, y_top=y_top,
                vmin=vmin, vmax=vmax, gamma=a.gamma, resample=a.resample,
-               webp_quality=a.webp_quality),
+               webp_quality=a.webp_quality,
+               label_zoom=(maxzoom if a.label_maxzoom else None), label_px=a.label_px,
+               label_decimals=a.label_decimals, label_suffix=a.label_suffix, label_sep=a.label_sep,
+               label_min_cover=a.label_min_cover),
     )
 
     jobs = []
@@ -410,6 +440,14 @@ def build_parser():
     p.add_argument("--minzoom", type=int); p.add_argument("--extra-zoom", type=int, default=1)
     p.add_argument("--maxzoom", type=int, help="Obergrenze; nie hoeher als nativ + --extra-zoom")
     p.add_argument("--description", help="Text fuer die MBTiles-Metadaten")
+    p.add_argument("--label-maxzoom", action="store_true",
+                   help="auf der hoechsten Zoomstufe den Mittelwert jeder Kachel als Zahl in die Mitte schreiben")
+    p.add_argument("--label-px", type=int, default=16, help="Schriftgroesse in Kachelpixeln")
+    p.add_argument("--label-decimals", type=int, default=1)
+    p.add_argument("--label-suffix", default="")
+    p.add_argument("--label-sep", default=",", help="Dezimaltrennzeichen")
+    p.add_argument("--label-min-cover", type=float, default=0.05,
+                   help="nur beschriften, wenn mindestens dieser Anteil der Kachel Daten hat")
     p.add_argument("--tile-size", type=int, default=256, choices=[256, 512])
     p.add_argument("--resample", choices=["nearest", "bilinear"], default="nearest")
     p.add_argument("--webp-quality", type=int, help="verlustbehaftet; ohne Angabe verlustfrei")

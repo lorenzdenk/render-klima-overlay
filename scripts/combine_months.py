@@ -32,8 +32,7 @@ def main():
     p.add_argument("--op", choices=["mean", "sum"], default="mean")
     p.add_argument("--weights", type=float, nargs="+")
     a = p.parse_args()
-    if len(a.inputs) < 2:
-        sys.exit("Mindestens zwei Eingaben.")
+    # eine einzelne Eingabe ist erlaubt (wird nur als Float32-GeoTIFF mit NaN als NoData umgeschrieben)
     w = a.weights or [1.0] * len(a.inputs)
     if len(w) != len(a.inputs):
         sys.exit("Anzahl --weights muss zur Anzahl Eingaben passen.")

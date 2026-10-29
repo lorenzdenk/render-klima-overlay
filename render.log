@@ -1,0 +1,26 @@
+Eingabe  : work/combined.tif
+Raster   : 17321 x 18763 Zellen, 30 m, EPSG:32755
+Werte    : min 0.00  mittel 0.56  max 12.40  (gueltig: 74350720)
+Skala    : YlGnBu 0..12 gamma 0.5
+Bereich  : lon 143.606..148.582  lat -43.862..-39.160
+Zoom     : 5..11  (nativ 11 bei -41.5 Grad, +0 extra)
+Kandidaten-Kacheln: 1509
+Zoom  Kacheln   Daten
+   5        4      10.8 KB
+   6        4      31.4 KB
+   7        6     106.4 KB
+   8       17     376.6 KB
+   9       45    1836.5 KB
+  10      132    6325.1 KB
+  11      438   20905.4 KB
+Summe     646   29592.3 KB   davon verschieden: 646   Datei: 30140.0 KB   (50.0 s)
+total 30160
+-rw-r--r-- 1 runner runner     9066 Oct 29 16:09 tasmanien-naechte-unter-1grad-25nov-31dez-legende.png
+-rw-r--r-- 1 runner runner 30863360 Oct 29 16:09 tasmanien-naechte-unter-1grad-25nov-31dez.mbtiles
+-rw-r--r-- 1 runner runner      761 Oct 29 16:09 tasmanien-naechte-unter-1grad-25nov-31dez.meta.json
+Vorschau z7/116/80 (57 kB)
+Vorschau z7/115/80 (35 kB)
+Vorschau z9/463/321 (128 kB)
+Vorschau z9/464/322 (118 kB)
+Vorschau z11/1855/1287 (105 kB)
+Vorschau z11/1854/1285 (104 kB)

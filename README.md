@@ -15,8 +15,9 @@ Gerendert wird nur so weit, wie die Daten reichen: Die höchste Zoomstufe ergibt
 |---|---|---|
 | `tas-tmin-fenster` | mittlere Tiefsttemperatur, °C | `min_avg_nov`, `min_avg_dec` |
 | `tas-niederschlag-fenster` | mittlere Monatssumme Niederschlag, mm/Monat | `ra_avg_nov`, `ra_avg_dec` |
+| `tas-frostnaechte` | Nächte pro Jahr mit Tmin < 1 °C, 25.11.–31.12. (unverändert) | `fr_lt1_2511to3112` |
 
-Beide sind das **gewichtete Mittel** von November und Dezember mit 11 : 7, also nach der Zahl der Tage, die das Fenster
+Tmin und Niederschlag sind das **gewichtete Mittel** von November und Dezember mit 11 : 7, also nach der Zahl der Tage, die das Fenster
 20.11.–07.12. in jedem Monat hat. Der Niederschlag bleibt dabei eine Monatssumme (mm/Monat); für die Menge im
 Fenster selbst ginge `OP=sum` mit `WEIGHTS="0.36667 0.22581"` (11/30 bzw. 7/31).
 
@@ -24,6 +25,9 @@ Quelle: **Digital Climate Maps of Tasmania** (theLIST, Tasmanische Regierung), M
 über den Dienst `https://spatial.dpipwe.tas.gov.au/naturalassets/Climate/ows` (WCS, Layer `Climate:<name>`).
 Raster: UTM 55S (EPSG:32755), 17 321 × 18 763 Zellen, Meer = NaN. Lizenz auf data.gov.au: nicht angegeben –
 vor einer Veröffentlichung bei nasis@nre.tas.gov.au nachfragen.
+Tmin und Frostnächte tragen auf Zoom 11 den Mittelwert jeder Kachel (ca. 14 × 14 km) als Zahl (`LABELS=1`).
+Die Tmin-Werte sind Monatsmittel der täglichen Tiefsttemperatur, offenbar mit Höhenkorrektur interpoliert: Kaltluftseen in
+Tälern und Senken sind darin kaum enthalten, dort ist es in klaren Nächten kälter als angezeigt.
 Der Dienst hat auch Projektionen (`_2030`, `_2050`, `_2070`, `_2100`), Tmax (`max_avg_<monat>`) und weitere
 Kennwerte (z. B. `max_mt30_1611to3112` = Tage über 30 °C); Liste im Branch `prepare-logs` (`coverages.txt`).
 

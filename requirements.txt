@@ -1,0 +1,8 @@
+numpy
+rasterio
+pyproj
+pillow
+matplotlib
+shapely
+xarray
+netCDF4

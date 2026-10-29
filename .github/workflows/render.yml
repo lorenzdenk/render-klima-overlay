@@ -1,0 +1,90 @@
+name: Render Klima-Overlay
+# Monatsraster (Release DATA_RELEASE) -> gewichtetes Mittel -> MBTiles-Overlay (512-px-WebP mit Transparenz,
+# deduplizierte Kacheln wie lorimaps-render). Höchste Zoomstufe = Datenauflösung, gedeckelt durch MAXZOOM.
+# Einstellungen: overlays/<name>.env; welche bei einem Push laufen: render.env (OVERLAYS).
+# Ergebnis: Release RELEASE (MBTiles, Legende, Metadaten); Logs und Vorschaubilder im Branch render-logs-<overlay>.
+on:
+  push:
+    branches: [main]
+    paths: ['render.env', 'overlays/**', 'scripts/render_mbtiles.py', 'scripts/combine_months.py', '.github/workflows/render.yml']
+  workflow_dispatch:
+    inputs:
+      overlays:
+        description: "Overlays (Dateien in overlays/ ohne .env, durch Leerzeichen getrennt), leer = render.env"
+        required: false
+permissions:
+  contents: write
+concurrency:
+  group: render-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  setup:
+    runs-on: ubuntu-24.04
+    outputs:
+      overlays: ${{ steps.r.outputs.overlays }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: r
+        run: |
+          source render.env
+          o="${{ github.event.inputs.overlays }}"; o="${o:-$OVERLAYS}"
+          for x in $o; do [ -f "overlays/$x.env" ] || { echo "overlays/$x.env fehlt"; exit 1; }; done
+          echo "overlays=$(python3 -c "import json,sys; print(json.dumps(sys.argv[1].split()))" "$o")" >> "$GITHUB_OUTPUT"
+          echo "Overlays: $o"
+
+  render:
+    needs: setup
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        overlay: ${{ fromJson(needs.setup.outputs.overlays) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: pip install -q numpy rasterio pyproj pillow matplotlib
+      - name: Settings
+        run: cat "overlays/${{ matrix.overlay }}.env" | grep -v '^#' | grep . | sed 's/"//g' >> "$GITHUB_ENV"
+      - name: Source data
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p data logs
+          for f in $INPUTS; do gh release download "$DATA_RELEASE" -p "$f" -D data -R "$GITHUB_REPOSITORY" --clobber; done
+          ls -l data | tee logs/source.log
+      - name: Combine
+        run: |
+          set -o pipefail
+          mkdir -p work
+          in=""; for f in $INPUTS; do in="$in data/$f"; done
+          python scripts/combine_months.py $in -o work/combined.tif --op "$OP" --weights $WEIGHTS 2>&1 | tee logs/combine.log
+      - name: Render
+        run: |
+          set -o pipefail
+          mkdir -p out
+          python scripts/render_mbtiles.py work/combined.tif -o "out/$NAME.mbtiles" --tile-size 512 --extra-zoom 0 \
+            --minzoom "$MINZOOM" --maxzoom "$MAXZOOM" --cmap "$CMAP" --vmin "$VMIN" --vmax "$VMAX" --gamma "${GAMMA:-1}" \
+            --unit "$UNIT" --name "$TITLE" --description "$DESCRIPTION" --attribution "$ATTRIBUTION" \
+            --webp-quality "${QUALITY:-90}" --workers 4 2>&1 | tee logs/render.log
+          mv "out/$NAME.legend.png" "out/$NAME-legende.png"
+          ls -l out | tee -a logs/render.log
+      - name: Preview
+        run: |
+          python scripts/preview.py "out/$NAME.mbtiles" logs 7 9 11 2>&1 | tee -a logs/render.log || true
+          cp "out/$NAME-legende.png" logs/
+      - name: Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release view "$RELEASE" -R "$GITHUB_REPOSITORY" >/dev/null 2>&1 || gh release create "$RELEASE" -R "$GITHUB_REPOSITORY" \
+            -t "Klima-Overlays Tasmanien" -n "MBTiles-Overlays (512-px-WebP mit Transparenz) für Zelten 20.11.–07.12. Quelle siehe Metadaten der Dateien und README." || true
+          gh release upload "$RELEASE" "out/$NAME.mbtiles" "out/$NAME-legende.png" "out/$NAME.meta.json" -R "$GITHUB_REPOSITORY" --clobber
+      - name: Publish log
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash scripts/push_logs.sh logs "render ${{ matrix.overlay }} ${{ github.run_id }} ${{ job.status }}" render-logs-${{ matrix.overlay }}

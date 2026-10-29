@@ -7,7 +7,7 @@ on:
     inputs:
       layers:
         description: "Layernamen, durch Leerzeichen getrennt (leer = nur Capabilities lesen)"
-        default: "min_avg_nov min_avg_dec"
+        default: "min_avg_nov min_avg_dec ra_avg_nov ra_avg_dec"
       force:
         description: "Vorhandene Release-Dateien neu laden"
         type: boolean

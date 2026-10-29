@@ -26,7 +26,7 @@ Quelle: **Digital Climate Maps of Tasmania** (theLIST, Tasmanische Regierung), M
 über den Dienst `https://spatial.dpipwe.tas.gov.au/naturalassets/Climate/ows` (WCS, Layer `Climate:<name>`).
 Raster: UTM 55S (EPSG:32755), 17 321 × 18 763 Zellen, Meer = NaN. Lizenz auf data.gov.au: nicht angegeben –
 vor einer Veröffentlichung bei nasis@nre.tas.gov.au nachfragen.
-Zahlen (`LABELS=1`): Mittelwert je Feld, `LABEL_GRID` Felder je Kachelseite ab `LABEL_MINZOOM` (Tmin: 1 je Kachel auf z11, Niederschlag: 4 × 4 ab z9, Frostnächte: 10 × 10 ab z9, ANU-Tmin: 10 × 10 ab z6).
+Zahlen (`LABELS=1`): Mittelwert je Feld, `LABEL_GRID` Felder je Kachelseite ab `LABEL_MINZOOM` (Tmin: 10 × 10 ab z9, Niederschlag: 4 × 4 ab z9, Frostnächte: 10 × 10 ab z9, ANU-Tmin: 10 × 10 ab z6).
 Die Tmin-Werte sind Monatsmittel der täglichen Tiefsttemperatur, offenbar mit Höhenkorrektur interpoliert: Kaltluftseen in
 Tälern und Senken sind darin kaum enthalten, dort ist es in klaren Nächten kälter als angezeigt.
 Der Dienst hat auch Projektionen (`_2030`, `_2050`, `_2070`, `_2100`), Tmax (`max_avg_<monat>`) und weitere

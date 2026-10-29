@@ -1,0 +1,69 @@
+360 Datensätze im Katalog, passend: 60
+Variable 'tmin' units='degree Celsius' long_name='Monthly minimum temperature for the Australian continent from 1960 to present, on the ANUClimate 0.01 x 0.01 degree grid.', Ausschnitt 510 x 430
+  1991-11: Mittel 6.32, min 0.43, max 11.76
+  1991-12: Mittel 8.67, min 2.68, max 13.78
+  1992-11: Mittel 6.72, min 0.42, max 12.04
+  1992-12: Mittel 9.25, min 3.11, max 14.80
+  1993-11: Mittel 6.22, min 0.43, max 11.68
+  1993-12: Mittel 8.35, min 2.08, max 13.68
+  1994-11: Mittel 6.02, min 0.34, max 11.62
+  1994-12: Mittel 8.58, min 3.31, max 13.98
+  1995-11: Mittel 6.47, min 0.44, max 12.14
+  1995-12: Mittel 6.73, min 0.77, max 12.28
+  1996-11: Mittel 5.31, min -0.65, max 11.06
+  1996-12: Mittel 6.48, min 0.79, max 11.95
+  1997-11: Mittel 6.75, min 1.39, max 12.30
+  1997-12: Mittel 7.82, min 1.89, max 13.60
+  1998-11: Mittel 6.20, min 0.47, max 11.58
+  1998-12: Mittel 9.03, min 3.16, max 14.36
+  1999-11: Mittel 5.77, min 0.03, max 11.94
+  1999-12: Mittel 8.89, min 2.78, max 14.40
+  2000-11: Mittel 9.28, min 3.54, max 14.89
+  2000-12: Mittel 8.14, min 2.10, max 13.89
+  2001-11: Mittel 6.86, min 0.79, max 12.31
+  2001-12: Mittel 7.14, min 0.80, max 12.69
+  2002-11: Mittel 7.18, min 1.73, max 12.63
+  2002-12: Mittel 9.04, min 3.15, max 14.21
+  2003-11: Mittel 7.04, min 1.51, max 12.37
+  2003-12: Mittel 9.23, min 3.75, max 14.73
+  2004-11: Mittel 7.37, min 1.53, max 12.78
+  2004-12: Mittel 8.97, min 3.13, max 14.14
+  2005-11: Mittel 8.18, min 2.34, max 13.76
+  2005-12: Mittel 9.54, min 3.59, max 14.54
+  2006-11: Mittel 5.76, min 0.24, max 11.29
+  2006-12: Mittel 7.32, min 1.21, max 13.10
+  2007-11: Mittel 8.04, min 2.76, max 13.53
+  2007-12: Mittel 9.45, min 3.47, max 14.93
+  2008-11: Mittel 6.77, min 0.53, max 12.45
+  2008-12: Mittel 7.37, min 1.16, max 13.10
+  2009-11: Mittel 8.89, min 3.95, max 14.50
+  2009-12: Mittel 8.47, min 2.58, max 13.98
+  2010-11: Mittel 7.41, min 1.73, max 13.02
+  2010-12: Mittel 8.22, min 2.04, max 13.83
+  2011-11: Mittel 7.64, min 2.02, max 13.41
+  2011-12: Mittel 8.75, min 2.48, max 14.15
+  2012-11: Mittel 7.41, min 2.09, max 12.93
+  2012-12: Mittel 8.47, min 2.50, max 13.87
+  2013-11: Mittel 6.86, min 1.11, max 12.45
+  2013-12: Mittel 8.44, min 2.66, max 14.01
+  2014-11: Mittel 6.96, min 1.44, max 12.31
+  2014-12: Mittel 9.24, min 3.30, max 14.76
+  2015-11: Mittel 7.78, min 2.00, max 13.05
+  2015-12: Mittel 9.34, min 3.68, max 14.83
+  2016-11: Mittel 7.22, min 1.30, max 12.46
+  2016-12: Mittel 8.92, min 3.39, max 14.46
+  2017-11: Mittel 8.94, min 3.48, max 14.83
+  2017-12: Mittel 10.05, min 4.05, max 15.54
+  2018-11: Mittel 7.80, min 1.98, max 12.98
+  2018-12: Mittel 10.30, min 4.71, max 15.89
+  2019-11: Mittel 6.19, min 0.36, max 11.73
+  2019-12: Mittel 8.19, min 2.87, max 13.66
+  2020-11: Mittel 8.48, min 3.11, max 13.88
+  2020-12: Mittel 7.93, min 1.64, max 13.54
+data/anu_tmin_1991-2020_11.tif: 30 Jahre (1991–2020), Mittel 7.13, min 1.43, max 12.56, gültig 82269
+data/anu_tmin_1991-2020_12.tif: 30 Jahre (1991–2020), Mittel 8.54, min 2.63, max 14.00, gültig 82269
+total 536
+-rw-r--r-- 1 runner runner    312 Oct 29 16:22 anu_tmin_1991-2020_11.json
+-rw-r--r-- 1 runner runner 266560 Oct 29 16:22 anu_tmin_1991-2020_11.tif
+-rw-r--r-- 1 runner runner    312 Oct 29 16:22 anu_tmin_1991-2020_12.json
+-rw-r--r-- 1 runner runner 267479 Oct 29 16:22 anu_tmin_1991-2020_12.tif

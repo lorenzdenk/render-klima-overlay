@@ -1,0 +1,19 @@
+Eingabe  : work/combined.tif
+Raster   : 510 x 430 Zellen, 0.01 deg, EPSG:4326
+Werte    : min 1.90  mittel 7.68  max 13.12  (gueltig: 82269)
+Skala    : RdYlBu_r 2..13 gamma 1
+Bereich  : lon 143.800..148.520  lat -43.760..-39.500
+Zoom     : 5..8  (nativ 7 bei -41.6 Grad, +1 extra)
+Kandidaten-Kacheln: 34
+Zoom  Kacheln   Daten
+   5        4      15.5 KB
+   6        4      56.6 KB
+   7        6     168.4 KB
+   8       17     519.7 KB
+Summe      31     760.1 KB   davon verschieden: 31   Datei: 812.0 KB   (1.4 s)
+total 832
+-rw-r--r-- 1 runner runner   9902 Oct 29 16:23 tasmanien-anu-tmin-20nov-07dez-legende.png
+-rw-r--r-- 1 runner runner 831488 Oct 29 16:23 tasmanien-anu-tmin-20nov-07dez.mbtiles
+-rw-r--r-- 1 runner runner    707 Oct 29 16:23 tasmanien-anu-tmin-20nov-07dez.meta.json
+Vorschau z7/116/80 (73 kB)
+Vorschau z7/115/80 (45 kB)

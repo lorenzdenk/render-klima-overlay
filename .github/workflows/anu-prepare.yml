@@ -22,7 +22,7 @@ on:
         default: anu_tmin_1991-2020
       list_root:
         description: "Diesen Katalog zusätzlich auflisten (zur Orientierung)"
-        default: "https://thredds.nci.org.au/thredds/catalog/gh70/ANUClimate/catalog.xml"
+        default: "https://thredds.nci.org.au/thredds/catalog/gh70/ANUClimate/v2-0/stable/month/catalog.xml"
 permissions:
   contents: write
 env:
@@ -41,8 +41,8 @@ jobs:
       - name: Catalog
         run: |
           mkdir -p logs
-          python scripts/thredds_fetch.py list "${{ github.event.inputs.list_root }}" --depth 4 2>&1 | head -300 | tee logs/catalog_root.log || true
-          python scripts/thredds_fetch.py list "${{ github.event.inputs.catalog }}" --depth 0 2>&1 | tee logs/catalog_var.log || true
+          python scripts/thredds_fetch.py list "${{ github.event.inputs.list_root }}" --depth 1 2>&1 | head -120 | tee logs/catalog_root.log || true
+          python scripts/thredds_fetch.py list "${{ github.event.inputs.catalog }}" --depth 1 2>&1 | head -80 | tee logs/catalog_var.log || true
       - name: Fetch
         run: |
           set -o pipefail

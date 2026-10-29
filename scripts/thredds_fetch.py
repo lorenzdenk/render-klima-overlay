@@ -88,7 +88,14 @@ def cmd_fetch(a):
     years = set(range(y0, y1 + 1))
     months = [int(m) for m in a.months]
     refs, dsets = read_catalog(a.catalog)
-    found = match_datasets(dsets, years, months)
+    dsets = [(n, p, a.catalog) for n, p in dsets]
+    # Unterkataloge pro Jahr (z. B. .../month/tmin/1991/catalog.xml) mitlesen
+    for title, sub in refs:
+        m = re.fullmatch(r"\s*((?:19|20)\d{2})\s*", title or "")
+        if m and int(m.group(1)) in years:
+            _, sd = read_catalog(sub)
+            dsets += [(n, p, sub) for n, p in sd]
+    found = match_datasets([(n, p) for n, p, _ in dsets], years, months)
     print(f"{len(dsets)} Datensätze im Katalog, passend: {len(found)}")
     if not found:
         for name, _ in dsets[:20]:

@@ -213,13 +213,22 @@ def _font(px):
     return S[key]
 
 
-def draw_label(im, value, ts, P):
-    """Mittelwert der Kachel (gueltige Pixel) als kleine Zahl in die Kachelmitte, dunkel mit hellem Rand."""
+def draw_labels(im, v, fin, ts, P):
+    """Kachel in label_grid x label_grid Felder teilen; in jedes Feld mit genug Daten den Mittelwert seiner
+    gueltigen Pixel als kleine Zahl in die Feldmitte schreiben (dunkel mit hellem Rand)."""
     from PIL import ImageDraw
-    txt = f"{value:.{P['label_decimals']}f}".replace(".", P["label_sep"]) + P["label_suffix"]
     d = ImageDraw.Draw(im)
-    d.text((ts / 2, ts / 2), txt, font=_font(P["label_px"]), anchor="mm", fill=(20, 20, 20, 255),
-           stroke_width=max(1, P["label_px"] // 7), stroke_fill=(255, 255, 255, 230))
+    g = max(1, P["label_grid"])
+    step = ts // g
+    for i in range(g):
+        for j in range(g):
+            sf = fin[i * step:(i + 1) * step, j * step:(j + 1) * step]
+            if sf.mean() < P["label_min_cover"]:
+                continue
+            value = float(np.mean(v[i * step:(i + 1) * step, j * step:(j + 1) * step][sf]))
+            txt = f"{value:.{P['label_decimals']}f}".replace(".", P["label_sep"]) + P["label_suffix"]
+            d.text((j * step + step / 2, i * step + step / 2), txt, font=_font(P["label_px"]), anchor="mm",
+                   fill=(20, 20, 20, 255), stroke_width=max(1, P["label_px"] // 7), stroke_fill=(255, 255, 255, 230))
 
 
 def render_tile(job):
@@ -249,8 +258,8 @@ def render_tile(job):
     rgba[..., 3] = np.where(fin, rgba[..., 3], 0)
     buf = io.BytesIO()
     im = Image.fromarray(rgba, "RGBA")
-    if P.get("label_zoom") is not None and z == P["label_zoom"] and fin.mean() >= P["label_min_cover"]:
-        draw_label(im, float(np.mean(v[fin])), ts, P)
+    if P.get("label_zoom") is not None and z >= P["label_zoom"]:
+        draw_labels(im, v, fin, ts, P)
     if P["webp_quality"] is None:
         im.save(buf, "WEBP", lossless=True, method=4)
     else:
@@ -327,7 +336,9 @@ def run(a):
         p=dict(tile_size=a.tile_size, cs=cs, cs_m=cs_m, x_left=x_left, y_top=y_top,
                vmin=vmin, vmax=vmax, gamma=a.gamma, resample=a.resample,
                webp_quality=a.webp_quality,
-               label_zoom=(maxzoom if a.label_maxzoom else None), label_px=a.label_px,
+               label_zoom=(None if not a.label_maxzoom else
+                           (maxzoom if a.label_minzoom is None else min(a.label_minzoom, maxzoom))),
+               label_px=a.label_px, label_grid=a.label_grid,
                label_decimals=a.label_decimals, label_suffix=a.label_suffix, label_sep=a.label_sep,
                label_min_cover=a.label_min_cover),
     )
@@ -441,13 +452,16 @@ def build_parser():
     p.add_argument("--maxzoom", type=int, help="Obergrenze; nie hoeher als nativ + --extra-zoom")
     p.add_argument("--description", help="Text fuer die MBTiles-Metadaten")
     p.add_argument("--label-maxzoom", action="store_true",
-                   help="auf der hoechsten Zoomstufe den Mittelwert jeder Kachel als Zahl in die Mitte schreiben")
+                   help="Zahlen einzeichnen (Mittelwert je Feld), standardmaessig nur auf der hoechsten Zoomstufe")
+    p.add_argument("--label-minzoom", type=int, help="Zahlen schon ab dieser Zoomstufe einzeichnen")
+    p.add_argument("--label-grid", type=int, default=1,
+                   help="Felder je Kachelseite: 1 = eine Zahl in der Kachelmitte, 4 = 4 x 4 Zahlen je Kachel")
     p.add_argument("--label-px", type=int, default=16, help="Schriftgroesse in Kachelpixeln")
     p.add_argument("--label-decimals", type=int, default=1)
     p.add_argument("--label-suffix", default="")
     p.add_argument("--label-sep", default=",", help="Dezimaltrennzeichen")
     p.add_argument("--label-min-cover", type=float, default=0.05,
-                   help="nur beschriften, wenn mindestens dieser Anteil der Kachel Daten hat")
+                   help="ein Feld nur beschriften, wenn mindestens dieser Anteil Daten hat")
     p.add_argument("--tile-size", type=int, default=256, choices=[256, 512])
     p.add_argument("--resample", choices=["nearest", "bilinear"], default="nearest")
     p.add_argument("--webp-quality", type=int, help="verlustbehaftet; ohne Angabe verlustfrei")

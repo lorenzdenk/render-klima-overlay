@@ -1,0 +1,282 @@
+WCS 2.0.1: 847649 Bytes, 375 Namen -> logs/capabilities_WCS_2.0.1.xml
+WCS 1.1.1: 198071 Bytes, 375 Namen -> logs/capabilities_WCS_1.1.1.xml
+WCS 1.0.0: 201516 Bytes, 376 Namen -> logs/capabilities_WCS_1.0.0.xml
+WMS 1.3.0: 837181 Bytes, 788 Namen -> logs/capabilities_WMS_1.3.0.xml
+--- Kandidaten (min/max/rain/prec):
+Climate:avg_min&amp;max_temps
+Climate:avg_rfall_monthly
+Climate:max _avgdaily_0110to1511_2018
+Climate:max _mt35_0812to1402_2018
+Climate:max_avg_apr
+Climate:max_avg_apr_2030
+Climate:max_avg_apr_2050
+Climate:max_avg_apr_2070
+Climate:max_avg_apr_2100
+Climate:max_avg_aug
+Climate:max_avg_aug_2030
+Climate:max_avg_aug_2050
+Climate:max_avg_aug_2070
+Climate:max_avg_aug_2100
+Climate:max_avg_dec
+Climate:max_avg_dec_2030
+Climate:max_avg_dec_2050
+Climate:max_avg_dec_2070
+Climate:max_avg_dec_2100
+Climate:max_avg_feb
+Climate:max_avg_feb_2030
+Climate:max_avg_feb_2050
+Climate:max_avg_feb_2070
+Climate:max_avg_feb_2100
+Climate:max_avg_jan
+Climate:max_avg_jan_2030
+Climate:max_avg_jan_2050
+Climate:max_avg_jan_2070
+Climate:max_avg_jan_2100
+Climate:max_avg_jul
+Climate:max_avg_jul_2030
+Climate:max_avg_jul_2050
+Climate:max_avg_jul_2070
+Climate:max_avg_jul_2100
+Climate:max_avg_jun
+Climate:max_avg_jun_2030
+Climate:max_avg_jun_2050
+Climate:max_avg_jun_2070
+Climate:max_avg_jun_2100
+Climate:max_avg_mar
+Climate:max_avg_mar_2030
+Climate:max_avg_mar_2050
+Climate:max_avg_mar_2070
+Climate:max_avg_mar_2100
+Climate:max_avg_may
+Climate:max_avg_may_2030
+Climate:max_avg_may_2050
+Climate:max_avg_may_2070
+Climate:max_avg_may_2100
+Climate:max_avg_nov
+Climate:max_avg_nov_2030
+Climate:max_avg_nov_2050
+Climate:max_avg_nov_2070
+Climate:max_avg_nov_2100
+Climate:max_avg_oct
+Climate:max_avg_oct_2030
+Climate:max_avg_oct_2050
+Climate:max_avg_oct_2070
+Climate:max_avg_oct_2100
+Climate:max_avg_sep
+Climate:max_avg_sep_2030
+Climate:max_avg_sep_2050
+Climate:max_avg_sep_2070
+Climate:max_avg_sep_2100
+Climate:max_avgdaily_0110to1511
+Climate:max_avgdaily_0110to1511_2030
+Climate:max_avgdaily_0110to1511_2050
+Climate:max_avgdaily_0110to1511_2070
+Climate:max_avgdaily_0110to1511_2100
+Climate:max_mt30_0112to2802
+Climate:max_mt30_0112to2802_2018
+Climate:max_mt30_0112to2802_2030
+Climate:max_mt30_0112to2802_2050
+Climate:max_mt30_0112to2802_2070
+Climate:max_mt30_0112to2802_2100
+Climate:max_mt30_1611to3112
+Climate:max_mt30_1611to3112_2018
+Climate:max_mt30_1611to3112_2030
+Climate:max_mt30_1611to3112_2050
+Climate:max_mt30_1611to3112_2070
+Climate:max_mt30_1611to3112_2100
+Climate:max_mt31_0101to2802
+Climate:max_mt31_0101to2802_2018
+Climate:max_mt31_0101to2802_2030
+Climate:max_mt31_0101to2802_2050
+Climate:max_mt31_0101to2802_2070
+Climate:max_mt31_0101to2802_2100
+Climate:max_mt35_0812to1402
+Climate:max_mt35_0812to1402_2030
+Climate:max_mt35_0812to1402_2050
+Climate:max_mt35_0812to1402_2070
+Climate:max_mt35_0812to1402_2100
+Climate:min_avg_apr
+Climate:min_avg_apr_2030
+Climate:min_avg_apr_2050
+Climate:min_avg_apr_2070
+Climate:min_avg_apr_2100
+Climate:min_avg_aug
+Climate:min_avg_aug_2030
+Climate:min_avg_aug_2050
+Climate:min_avg_aug_2070
+Climate:min_avg_aug_2100
+Climate:min_avg_dec
+Climate:min_avg_dec_2030
+Climate:min_avg_dec_2050
+Climate:min_avg_dec_2070
+Climate:min_avg_dec_2100
+Climate:min_avg_feb
+Climate:min_avg_feb_2030
+Climate:min_avg_feb_2050
+Climate:min_avg_feb_2070
+Climate:min_avg_feb_2100
+Climate:min_avg_jan
+Climate:min_avg_jan_2030
+Climate:min_avg_jan_2050
+Climate:min_avg_jan_2070
+Climate:min_avg_jan_2100
+Climate:min_avg_jul
+Climate:min_avg_jul_2030
+Climate:min_avg_jul_2050
+Climate:min_avg_jul_2070
+Climate:min_avg_jul_2100
+Climate:min_avg_jun
+Climate:min_avg_jun_2030
+Climate:min_avg_jun_2050
+Climate:min_avg_jun_2070
+Climate:min_avg_jun_2100
+Climate:min_avg_mar
+Climate:min_avg_mar_2030
+Climate:min_avg_mar_2050
+Climate:min_avg_mar_2070
+Climate:min_avg_mar_2100
+Climate:min_avg_may
+Climate:min_avg_may_2030
+Climate:min_avg_may_2050
+Climate:min_avg_may_2070
+Climate:min_avg_may_2100
+Climate:min_avg_nov
+Climate:min_avg_nov_2030
+Climate:min_avg_nov_2050
+Climate:min_avg_nov_2070
+Climate:min_avg_nov_2100
+Climate:min_avg_oct
+Climate:min_avg_oct_2030
+Climate:min_avg_oct_2050
+Climate:min_avg_oct_2070
+Climate:min_avg_oct_2100
+Climate:min_avg_sep
+Climate:min_avg_sep_2030
+Climate:min_avg_sep_2050
+Climate:min_avg_sep_2070
+Climate:min_avg_sep_2100
+Climate:min_mt20_0111to2802
+Climate:min_mt20_0111to2802_2018
+Climate:min_mt20_0111to2802_2030
+Climate:min_mt20_0111to2802_2050
+Climate:min_mt20_0111to2802_2070
+Climate:min_mt20_0111to2802_2100
+Climate:ra_avg_0101to3112
+Climate:ra_avg_0101to3112_2018
+Climate:ra_avg_0101to3112_2030
+Climate:ra_avg_0101to3112_2050
+Climate:ra_avg_0101to3112_2070
+Climate:ra_avg_0101to3112_2100
+Climate:ra_avg_apr
+Climate:ra_avg_apr_2030
+Climate:ra_avg_apr_2050
+Climate:ra_avg_apr_2070
+Climate:ra_avg_apr_2100
+Climate:ra_avg_aug
+Climate:ra_avg_aug_2030
+Climate:ra_avg_aug_2050
+Climate:ra_avg_aug_2070
+Climate:ra_avg_aug_2100
+Climate:ra_avg_dec
+Climate:ra_avg_dec_2030
+Climate:ra_avg_dec_2050
+Climate:ra_avg_dec_2070
+Climate:ra_avg_dec_2100
+Climate:ra_avg_feb
+Climate:ra_avg_feb_2030
+Climate:ra_avg_feb_2050
+Climate:ra_avg_feb_2070
+Climate:ra_avg_feb_2100
+Climate:ra_avg_jan
+Climate:ra_avg_jan_2030
+Climate:ra_avg_jan_2050
+Climate:ra_avg_jan_2070
+Climate:ra_avg_jan_2100
+Climate:ra_avg_jul
+Climate:ra_avg_jul_2030
+Climate:ra_avg_jul_2050
+Climate:ra_avg_jul_2070
+Climate:ra_avg_jul_2100
+Climate:ra_avg_jun
+Climate:ra_avg_jun_2030
+Climate:ra_avg_jun_2050
+Climate:ra_avg_jun_2070
+Climate:ra_avg_jun_2100
+Climate:ra_avg_mar
+fr_lt1_2511to3112: Coverage-ID WCS 2.0.1 = Climate__fr_lt1_2511to3112, WCS 1.0.0 = Climate:fr_lt1_2511to3112
+GetCoverage: https://spatial.dpipwe.tas.gov.au/naturalassets/Climate/ows?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&COVERAGEID=Climate__fr_lt1_2511to3112&FORMAT=image/tiff
+  1319.1 MB, Content-Type image/tiff
+Driver: GTiff/GeoTIFF
+Files: data/fr_lt1_2511to3112.tif
+Size is 17321, 18763
+Coordinate System is:
+PROJCRS["WGS 84 / UTM zone 55S",
+    BASEGEOGCRS["WGS 84",
+        DATUM["World Geodetic System 1984",
+            ELLIPSOID["WGS 84",6378137,298.257223563,
+                LENGTHUNIT["metre",1]]],
+        PRIMEM["Greenwich",0,
+            ANGLEUNIT["degree",0.0174532925199433]],
+        ID["EPSG",4326]],
+    CONVERSION["UTM zone 55S",
+        METHOD["Transverse Mercator",
+            ID["EPSG",9807]],
+        PARAMETER["Latitude of natural origin",0,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8801]],
+        PARAMETER["Longitude of natural origin",147,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8802]],
+        PARAMETER["Scale factor at natural origin",0.9996,
+            SCALEUNIT["unity",1],
+            ID["EPSG",8805]],
+        PARAMETER["False easting",500000,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8806]],
+        PARAMETER["False northing",10000000,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8807]]],
+    CS[Cartesian,2],
+        AXIS["(E)",east,
+            ORDER[1],
+            LENGTHUNIT["metre",1]],
+        AXIS["(N)",north,
+            ORDER[2],
+            LENGTHUNIT["metre",1]],
+    USAGE[
+        SCOPE["Navigation and medium accuracy spatial referencing."],
+        AREA["Between 144°E and 150°E, southern hemisphere between 80°S and equator, onshore and offshore. Australia. Papua New Guinea."],
+        BBOX[-80,144,0,150]],
+    ID["EPSG",32755]]
+Data axis to CRS axis mapping: 1,2
+Origin = (153562.605245916987769,5683208.004142959602177)
+Pixel Size = (30.000000000000000,-30.000000000000000)
+Metadata:
+  AREA_OR_POINT=Area
+  TIFFTAG_RESOLUTIONUNIT=1 (unitless)
+  TIFFTAG_XRESOLUTION=1
+  TIFFTAG_YRESOLUTION=1
+Image Structure Metadata:
+  COMPRESSION=DEFLATE
+  INTERLEAVE=BAND
+  PREDICTOR=3
+Corner Coordinates:
+Upper Left  (  153562.605, 5683208.004) (143d 0'13.38"E, 38d55'53.98"S)
+Lower Left  (  153562.605, 5120318.004) (142d40'47.69"E, 43d59'18.82"S)
+Upper Right (  673192.605, 5683208.004) (148d59'58.35"E, 38d58'58.81"S)
+Lower Right (  673192.605, 5120318.004) (149d 9'43.20"E, 44d 2'59.46"S)
+Center      (  413377.605, 5401763.004) (145d57'41.95"E, 41d31'51.95"S)
+Band 1 Block=256x256 Type=Float32, ColorInterp=Gray
+  Minimum=0.000, Maximum=12.400, Mean=0.556, StdDev=1.297
+  Metadata:
+    STATISTICS_MAXIMUM=12.39999961853
+    STATISTICS_MEAN=0.55580106677026
+    STATISTICS_MINIMUM=0
+    STATISTICS_STDDEV=1.2972911184521
+    STATISTICS_VALID_PERCENT=22.88
+
+fr_lt1_2511to3112.tif  54556246
+min_avg_dec.tif  97653671
+min_avg_nov.tif  89010353
+ra_avg_dec.tif  65961076
+ra_avg_nov.tif  69069135

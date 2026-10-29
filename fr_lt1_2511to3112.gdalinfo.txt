@@ -1,0 +1,68 @@
+Driver: GTiff/GeoTIFF
+Files: data/fr_lt1_2511to3112.tif
+Size is 17321, 18763
+Coordinate System is:
+PROJCRS["WGS 84 / UTM zone 55S",
+    BASEGEOGCRS["WGS 84",
+        DATUM["World Geodetic System 1984",
+            ELLIPSOID["WGS 84",6378137,298.257223563,
+                LENGTHUNIT["metre",1]]],
+        PRIMEM["Greenwich",0,
+            ANGLEUNIT["degree",0.0174532925199433]],
+        ID["EPSG",4326]],
+    CONVERSION["UTM zone 55S",
+        METHOD["Transverse Mercator",
+            ID["EPSG",9807]],
+        PARAMETER["Latitude of natural origin",0,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8801]],
+        PARAMETER["Longitude of natural origin",147,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8802]],
+        PARAMETER["Scale factor at natural origin",0.9996,
+            SCALEUNIT["unity",1],
+            ID["EPSG",8805]],
+        PARAMETER["False easting",500000,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8806]],
+        PARAMETER["False northing",10000000,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8807]]],
+    CS[Cartesian,2],
+        AXIS["(E)",east,
+            ORDER[1],
+            LENGTHUNIT["metre",1]],
+        AXIS["(N)",north,
+            ORDER[2],
+            LENGTHUNIT["metre",1]],
+    USAGE[
+        SCOPE["Navigation and medium accuracy spatial referencing."],
+        AREA["Between 144°E and 150°E, southern hemisphere between 80°S and equator, onshore and offshore. Australia. Papua New Guinea."],
+        BBOX[-80,144,0,150]],
+    ID["EPSG",32755]]
+Data axis to CRS axis mapping: 1,2
+Origin = (153562.605245916987769,5683208.004142959602177)
+Pixel Size = (30.000000000000000,-30.000000000000000)
+Metadata:
+  AREA_OR_POINT=Area
+  TIFFTAG_RESOLUTIONUNIT=1 (unitless)
+  TIFFTAG_XRESOLUTION=1
+  TIFFTAG_YRESOLUTION=1
+Image Structure Metadata:
+  COMPRESSION=DEFLATE
+  INTERLEAVE=BAND
+  PREDICTOR=3
+Corner Coordinates:
+Upper Left  (  153562.605, 5683208.004) (143d 0'13.38"E, 38d55'53.98"S)
+Lower Left  (  153562.605, 5120318.004) (142d40'47.69"E, 43d59'18.82"S)
+Upper Right (  673192.605, 5683208.004) (148d59'58.35"E, 38d58'58.81"S)
+Lower Right (  673192.605, 5120318.004) (149d 9'43.20"E, 44d 2'59.46"S)
+Center      (  413377.605, 5401763.004) (145d57'41.95"E, 41d31'51.95"S)
+Band 1 Block=256x256 Type=Float32, ColorInterp=Gray
+  Minimum=0.000, Maximum=12.400, Mean=0.556, StdDev=1.297
+  Metadata:
+    STATISTICS_MAXIMUM=12.39999961853
+    STATISTICS_MEAN=0.55580106677026
+    STATISTICS_MINIMUM=0
+    STATISTICS_STDDEV=1.2972911184521
+    STATISTICS_VALID_PERCENT=22.88
